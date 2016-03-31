@@ -1,3 +1,3 @@
 ### LowRezJam
 
-My submission to [#LowRezJam](https://itch.io/jam/lowrezjam2016)
+My submission to [#LowRezJam2016](https://itch.io/jam/lowrezjam2016)
