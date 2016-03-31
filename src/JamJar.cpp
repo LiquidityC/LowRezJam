@@ -14,19 +14,13 @@ void JamJar::handle(const SDL_Event& event)
 		return;
 	}
 
-	if (event.type == SDL_KEYDOWN) {
-		if (event.key.keysym.sym == SDLK_LEFT) {
-			entityProperties.setXvel(-100);
-		}
-		if (event.key.keysym.sym == SDLK_RIGHT) {
-			entityProperties.setXvel(100);
-		}
-	} else {
-		if (event.key.keysym.sym == SDLK_LEFT) {
-			entityProperties.setXvel(0);
-		}
-		if (event.key.keysym.sym == SDLK_RIGHT) {
-			entityProperties.setXvel(0);
-		}
+	activeKeys[event.key.keysym.sym] = event.type == SDL_KEYDOWN;
+}
+
+void JamJar::preMove(const flat2d::GameData *gameData)
+{
+	entityProperties.setXvel(0);
+	if (activeKeys[SDLK_LEFT] ^ activeKeys[SDLK_RIGHT]) {
+		entityProperties.setXvel(activeKeys[SDLK_LEFT] ? -100 : 100);
 	}
 }

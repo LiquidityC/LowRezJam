@@ -2,11 +2,12 @@
 #define	JAMJAR_H_
 
 #include <flat/flat.h>
+#include <map>
 
 class JamJar : public flat2d::Entity
 {
 	private:
-		
+		std::map<SDL_Keycode, bool> activeKeys;
 
 	public:
 		JamJar(int x, int y) : Entity(x, y, 8, 8) { }
@@ -20,6 +21,7 @@ class JamJar : public flat2d::Entity
 
 		void init(const flat2d::GameData*);
 		void handle(const SDL_Event& event);
+		void preMove(const flat2d::GameData*);
 };
 
 #endif // JAMJAR_H_
