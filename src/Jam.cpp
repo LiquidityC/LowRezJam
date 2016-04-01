@@ -19,5 +19,5 @@ void Jam::preMove(const flat2d::GameData *gameData)
 		setClip(rect);
 	}
 
-	entityProperties.setYvel(65);
+	entityProperties.setYvel(35);
 }

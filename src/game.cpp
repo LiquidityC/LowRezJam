@@ -34,7 +34,7 @@ int main( int argc, char* args[] )
 	gameStateController->resetGame(flat->getGameData());
 
 	flat2d::GameEngine *engine = flat->getGameEngine();
-	engine->init(SCREEN_DIMENSION, SCREEN_DIMENSION, 60);
+	engine->init(SCREEN_DIMENSION, SCREEN_DIMENSION, 24);
 
 	SDL_RenderSetLogicalSize(flat->getGameData()->getRenderData()->getRenderer(), SCREEN_SCALE_DIMENSION, SCREEN_SCALE_DIMENSION);
 

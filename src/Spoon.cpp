@@ -9,7 +9,7 @@ void Spoon::init(const flat2d::GameData *gameData)
 
 void Spoon::preMove(const flat2d::GameData *gameData)
 {
-	if (clipTimer.getTicks() > 50) {
+	if (clipTimer.getTicks() > 60) {
 		clipTimer.stop();
 		clipTimer.start();
 
@@ -19,5 +19,5 @@ void Spoon::preMove(const flat2d::GameData *gameData)
 		setClip(rect);
 	}
 
-	entityProperties.setYvel(65);
+	entityProperties.setYvel(15);
 }
