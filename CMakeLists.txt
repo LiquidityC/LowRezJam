@@ -20,7 +20,7 @@ include_directories(${PROJECT_BINARY_DIR} ${PROJECT_BINARY_DIR}/flat/include inc
 link_directories(${PROJECT_BINARY_DIR}/flat/lib)
 
 add_executable(lowrezjam src/game.cpp src/GameStateController.cpp src/JamJar.cpp
-	src/Jam.cpp src/Spoon.cpp)
+	src/Jam.cpp src/Spoon.cpp src/EntityGenerator.cpp)
 
 target_link_libraries(lowrezjam flat -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf)
 target_compile_options(lowrezjam PRIVATE -std=c++11)

@@ -12,6 +12,7 @@ void GameStateController::handle(const SDL_Event& event)
 
 bool GameStateController::gameStateCheck(flat2d::GameData *gameData)
 {
+	generator.generate(gameData);
 	return false;
 }
 

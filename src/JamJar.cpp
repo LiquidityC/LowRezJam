@@ -24,3 +24,19 @@ void JamJar::preMove(const flat2d::GameData *gameData)
 		entityProperties.setXvel(activeKeys[SDLK_LEFT] ? -100 : 100);
 	}
 }
+
+bool JamJar::onVerticalCollision(flat2d::Entity *collider, const flat2d::GameData *gameData)
+{
+	switch (collider->getType()) {
+		case EntityType::SPOON:
+			jamContent--;
+			break;
+		case EntityType::JAM:
+			jamContent++;
+			break;
+		default:
+			break;
+	}
+
+	return false;
+}

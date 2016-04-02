@@ -19,5 +19,20 @@ void Spoon::preMove(const flat2d::GameData *gameData)
 		setClip(rect);
 	}
 
-	entityProperties.setYvel(15);
+	entityProperties.setYvel(55);
+}
+
+bool Spoon::onVerticalCollision(flat2d::Entity *collider, const flat2d::GameData *gameData)
+{
+	switch (collider->getType()) {
+		case EntityType::SPOON:
+			return true;
+		case EntityType::JAM:
+			return true;
+		default:
+			break;
+	}
+
+	setDead(true);
+	return true;
 }

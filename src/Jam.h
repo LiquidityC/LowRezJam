@@ -2,6 +2,7 @@
 #define	JAM_H_
 
 #include <flat/flat.h>
+#include "EntityTypes.h"
 
 class Jam : public flat2d::Entity
 {
@@ -22,13 +23,14 @@ class Jam : public flat2d::Entity
 			}
 		}
 
+		int getType() const {
+			return EntityType::JAM;
+		}
+
 		void init(const flat2d::GameData*);
 		void preMove(const flat2d::GameData*);
 
-		bool onVerticalCollision(flat2d::Entity *collider, const flat2d::GameData *gameData) {
-			setDead(true);
-			return true;
-		}
+		bool onVerticalCollision(flat2d::Entity *collider, const flat2d::GameData *gameData);
 };
 
 #endif // JAM_H_

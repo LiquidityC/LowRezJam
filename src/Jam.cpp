@@ -21,3 +21,18 @@ void Jam::preMove(const flat2d::GameData *gameData)
 
 	entityProperties.setYvel(35);
 }
+
+bool Jam::onVerticalCollision(flat2d::Entity *collider, const flat2d::GameData *gameData)
+{
+	switch (collider->getType()) {
+		case EntityType::SPOON:
+			return true;
+		case EntityType::JAM:
+			return true;
+		default:
+			break;
+	}
+
+	setDead(true);
+	return true;
+}
