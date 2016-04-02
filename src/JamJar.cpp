@@ -2,8 +2,8 @@
 
 void JamJar::init(const flat2d::GameData *gameData)
 {
-	setTexture(flat2d::MediaUtil::loadTexture("textures/JamJar.png",
-				gameData->getRenderData()->getRenderer()));
+	SDL_Renderer *renderer = gameData->getRenderData()->getRenderer();
+	setTexture(flat2d::MediaUtil::loadTexture("textures/JamJar.png", renderer));
 	setInputHandler(true);
 	entityProperties.setCollidable(true);
 }
@@ -23,6 +23,19 @@ void JamJar::preMove(const flat2d::GameData *gameData)
 	if (activeKeys[SDLK_LEFT] ^ activeKeys[SDLK_RIGHT]) {
 		entityProperties.setXvel(activeKeys[SDLK_LEFT] ? -100 : 100);
 	}
+}
+
+void JamJar::postMove(const flat2d::GameData *gameData)
+{
+	// Update the jam with the JamJars position
+}
+
+void JamJar::render(const flat2d::RenderData *renderData) const
+{
+	for (auto it = jam.begin(); it != jam.end(); it++) {
+		(*it)->render(renderData->getRenderer());
+	}
+	Entity::render(renderData);
 }
 
 bool JamJar::onVerticalCollision(flat2d::Entity *collider, const flat2d::GameData *gameData)
