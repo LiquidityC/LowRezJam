@@ -5,7 +5,8 @@ enum EntityType {
 	JAM_JAR,
 	SPOON,
 	JAM,
-	FLOOR
+	FLOOR,
+	JAM_SPOT
 };
 
 #endif // ENTITYTYPES_H_
