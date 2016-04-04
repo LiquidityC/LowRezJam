@@ -1,5 +1,6 @@
 #include "Jam.h"
 #include "JamSpot.h"
+#include "Layers.h"
 
 void Jam::init(const flat2d::GameData *gameData)
 {
@@ -43,7 +44,7 @@ bool Jam::onVerticalCollision(flat2d::Entity *collider, const flat2d::GameData *
 	if (createSpot) {
 		JamSpot *jamSpot = new JamSpot(entityProperties.getXpos(), entityProperties.getYpos() + 4);
 		jamSpot->init(gameData);
-		gameData->getEntityContainer()->registerObject(jamSpot);
+		gameData->getEntityContainer()->registerObject(jamSpot, FG);
 	}
 
 	setDead(true);

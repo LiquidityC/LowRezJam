@@ -2,6 +2,7 @@
 #include "EntityGenerator.h"
 #include "Jam.h"
 #include "Spoon.h"
+#include "Layers.h"
 
 void EntityGenerator::generate(const flat2d::GameData *gameData)
 {
@@ -23,7 +24,7 @@ void EntityGenerator::generateSpoon(const flat2d::GameData *gameData)
 
 	flat2d::Entity *entity = new Spoon(getRandomNumber(0, 59));
 	entity->init(gameData);
-	entityContainer->registerObject(entity);
+	entityContainer->registerObject(entity, FG);
 }
 
 void EntityGenerator::generateJam(const flat2d::GameData *gameData)
@@ -32,7 +33,7 @@ void EntityGenerator::generateJam(const flat2d::GameData *gameData)
 
 	flat2d::Entity *entity = new Jam(getRandomNumber(0, 59));
 	entity->init(gameData);
-	entityContainer->registerObject(entity);
+	entityContainer->registerObject(entity, FG);
 }
 
 int EntityGenerator::getRandomNumber(int min, int max) const

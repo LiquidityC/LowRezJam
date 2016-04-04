@@ -7,6 +7,7 @@
 #include <sstream>
 
 #include "GameStateController.h"
+#include "Layers.h"
 
 #define SCREEN_DIMENSION 512
 #define SCREEN_SCALE_DIMENSION 64
