@@ -6,18 +6,17 @@
 
 void EntityGenerator::generate(const flat2d::GameData *gameData)
 {
-	unsigned int generateTime = 4000 / level;
-	if (jamTimer.getTicks() > generateTime) {
-		jamTimer.stop();
-		jamTimer.start();
-		for (int i = 0; i < (level % 6); i++) {
+	if (timer.getTicks() > 500) {
+		timer.stop();
+		timer.start();
+
+		bool genSpoon = getRandomNumber(1, 10) <= level;
+		bool genJam = getRandomNumber(1, 10) <= level;
+
+		if (genJam) {
 			generateJam(gameData);
 		}
-	}
-	if (spoonTimer.getTicks() > generateTime) {
-		spoonTimer.stop();
-		spoonTimer.start();
-		for (int i = 0; i < (level % 4); i++) {
+		if (genSpoon) {
 			generateSpoon(gameData);
 		}
 	}
@@ -43,8 +42,8 @@ void EntityGenerator::generateJam(const flat2d::GameData *gameData)
 
 int EntityGenerator::getRandomNumber(int min, int max) const
 {
-	std::random_device random;
-	std::mt19937 engine(random());
+	static std::random_device random;
+	static std::mt19937 engine(random());
 	std::uniform_int_distribution<int> dist(min, max);
 
 	return dist(engine);

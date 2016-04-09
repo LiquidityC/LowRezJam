@@ -6,7 +6,7 @@
 class EntityGenerator
 {
 	private:
-		flat2d::Timer spoonTimer, jamTimer;
+		flat2d::Timer timer;
 
 		void generateSpoon(const flat2d::GameData*);
 		void generateJam(const flat2d::GameData*);
@@ -16,8 +16,7 @@ class EntityGenerator
 
 	public:
 		EntityGenerator() {
-			spoonTimer.start();
-			jamTimer.start();
+			timer.start();
 		}
 
 		void generate(const flat2d::GameData*);
