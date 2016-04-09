@@ -11,8 +11,9 @@ class Spoon : public flat2d::Entity
 		flat2d::Timer clipTimer;
 
 	public:
-		Spoon(int x) : Entity(x, 0, 5, 10) {
+		Spoon(int x, int yv) : Entity(x, 0, 5, 10) {
 			entityProperties.setCollidable(true);
+			entityProperties.setYvel(yv);
 			clipTimer.start();
 		}
 

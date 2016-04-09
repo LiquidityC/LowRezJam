@@ -18,8 +18,6 @@ void Spoon::preMove(const flat2d::GameData *gameData)
 		SDL_Rect rect = { clipIndex * 5, 0, 5, 10 };
 		setClip(rect);
 	}
-
-	entityProperties.setYvel(55);
 }
 
 bool Spoon::onVerticalCollision(flat2d::Entity *collider, const flat2d::GameData *gameData)

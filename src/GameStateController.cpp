@@ -26,6 +26,15 @@ void GameStateController::setState(GameState state)
 
 bool GameStateController::gameStateCheck(flat2d::GameData *gameData)
 {
+	// Game win
+	if (jamJar != nullptr && jamJar->isFull()) {
+		generator.setLevel(generator.getLevel() + 1);
+		resetGame(gameData);
+		return true;
+	} else if (jamJar != nullptr && jamJar->isBroken()) {
+		// GameOver
+	}
+
 	if (stateChange) {
 		resetGame(gameData);
 		stateChange = false;
@@ -40,7 +49,7 @@ bool GameStateController::gameStateCheck(flat2d::GameData *gameData)
 
 bool GameStateController::quit()
 {
-	return jamJar != nullptr && (jamJar->isBroken() || jamJar->isFull());
+	return jamJar != nullptr && jamJar->isBroken();
 }
 
 void GameStateController::resetGame(flat2d::GameData *gameData)
@@ -102,11 +111,6 @@ void GameStateController::reloadGame(flat2d::GameData *gameData)
 	flat2d::Entity *bg = new Background();
 	bg->init(gameData);
 	container->registerObject(bg, BG);
-
-	// Create the Jam jar
-	if (jamJar) {
-		delete jamJar;
-	}
 
 	jamJar = new JamJar(28, 50);
 	jamJar->init(gameData);

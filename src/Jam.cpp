@@ -21,7 +21,6 @@ void Jam::preMove(const flat2d::GameData *gameData)
 		setClip(rect);
 	}
 
-	entityProperties.setYvel(35);
 }
 
 bool Jam::onVerticalCollision(flat2d::Entity *collider, const flat2d::GameData *gameData)
