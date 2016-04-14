@@ -11,7 +11,7 @@ class Jam : public flat2d::Entity
 		flat2d::Timer clipTimer;
 
 	public:
-		Jam(int x, int vel) : Entity(x, 0, 5, 5) {
+		Jam(int x, int vel) : Entity(x, -5, 5, 5) {
 			entityProperties.setCollidable(true);
 			entityProperties.setYvel(vel);
 			clipTimer.start();

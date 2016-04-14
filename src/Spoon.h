@@ -11,10 +11,13 @@ class Spoon : public flat2d::Entity
 		flat2d::Timer clipTimer;
 
 	public:
-		Spoon(int x, int yv) : Entity(x, 0, 5, 10) {
+		Spoon(int x, int yv) : Entity(x, -10, 5, 10) {
 			entityProperties.setCollidable(true);
 			entityProperties.setYvel(yv);
 			clipTimer.start();
+
+			flat2d::EntityShape shape = { 1, 0, 3, 10 };
+			entityProperties.setColliderShape(shape);
 		}
 
 		~Spoon() {

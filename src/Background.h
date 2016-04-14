@@ -5,8 +5,11 @@
 
 class Background : public flat2d::Entity
 {
+	private:
+		std::string filename;
+
 	public:
-		Background() : Entity(0, 0, 64, 64) {
+		Background(std::string fn) : Entity(0, 0, 64, 64), filename(fn) {
 			entityProperties.setCollidable(false);
 		}
 

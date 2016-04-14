@@ -4,15 +4,24 @@
 #include "Jam.h"
 #include "Spoon.h"
 #include "Background.h"
-#include "MainScreen.h"
 #include "Layers.h"
+#include "Number.h"
 
 void GameStateController::handle(const SDL_Event& event)
 {
-	if (state == GameState::MAIN_MENU) {
-		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
-			setState(GameState::GAME);
-		}
+	switch (state) {
+		case GameState::MAIN_MENU:
+			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
+				setState(GameState::LEVEL_SCREEN);
+			}
+			break;
+		case GameState::LEVEL_SCREEN:
+			if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
+				setState(GameState::GAME);
+			}
+			break;
+		default:
+			break;
 	}
 }
 
@@ -29,8 +38,7 @@ bool GameStateController::gameStateCheck(flat2d::GameData *gameData)
 	// Game win
 	if (jamJar != nullptr && jamJar->isFull()) {
 		generator.setLevel(generator.getLevel() + 1);
-		resetGame(gameData);
-		return true;
+		setState(GameState::LEVEL_SCREEN);
 	} else if (jamJar != nullptr && jamJar->isBroken()) {
 		// GameOver
 	}
@@ -55,6 +63,7 @@ bool GameStateController::quit()
 void GameStateController::resetGame(flat2d::GameData *gameData)
 {
 	flat2d::EntityContainer *container = gameData->getEntityContainer();
+	jamJar = nullptr;
 	container->unregisterAllObjects();
 	container->addLayer(BG);
 	container->addLayer(FG);
@@ -82,14 +91,22 @@ void GameStateController::resetGame(flat2d::GameData *gameData)
 
 void GameStateController::reloadMainMenu(flat2d::GameData *gameData)
 {
-	flat2d::Entity *main = new MainScreen();
+	flat2d::Entity *main = new Background("textures/MainMenu.png");
 	main->init(gameData);
 	gameData->getEntityContainer()->registerObject(main, BG);
 }
 
 void GameStateController::reloadLevelScreen(flat2d::GameData *gameData)
 {
-	// implement
+	flat2d::Entity *bg = new Background("textures/LevelScreen.png");
+	bg->init(gameData);
+	Number *number = new Number(20, 30);
+	number->init(gameData);
+	number->setValue(generator.getLevel());
+
+	flat2d::EntityContainer * container = gameData->getEntityContainer();
+	container->registerObject(bg, BG);
+	container->registerObject(number, FG);
 }
 
 void GameStateController::reloadWinScreen(flat2d::GameData *gameData)
@@ -108,7 +125,7 @@ void GameStateController::reloadGame(flat2d::GameData *gameData)
 
 	gameData->getRenderData()->getCamera()->setMapDimensions(64, 64);
 
-	flat2d::Entity *bg = new Background();
+	flat2d::Entity *bg = new Background("textures/Background.png");
 	bg->init(gameData);
 	container->registerObject(bg, BG);
 
