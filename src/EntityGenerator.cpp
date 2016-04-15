@@ -6,7 +6,12 @@
 
 void EntityGenerator::generate(const flat2d::GameData *gameData)
 {
-	if (timer.getTicks() > 500) {
+	unsigned int time = 500;
+	if (level > 10) {
+		time = time / ((level - (level / 10))/10);
+	}
+
+	if (timer.getTicks() > time) {
 		timer.stop();
 		timer.start();
 
