@@ -12,7 +12,7 @@ PKG_SEARCH_MODULE(SDL2IMAGE REQUIRED SDL2_image>=2.0.0)
 PKG_SEARCH_MODULE(SDL2TTF REQUIRED SDL2_ttf>=2.0.0)
 PKG_SEARCH_MODULE(SDL2MIXER REQUIRED SDL2_mixer>=2.0.0)
 
-add_definitions("-Wall")
+add_definitions("-std=c++11 -Wall")
 
 add_subdirectory(flat)
 
@@ -23,5 +23,8 @@ add_executable(lowrezjam src/game.cpp src/GameStateController.cpp src/JamJar.cpp
 	src/Jam.cpp src/Spoon.cpp src/EntityGenerator.cpp src/JamSpot.cpp src/Background.cpp
 	src/Number.cpp src/ResourceLoader.cpp)
 
-target_link_libraries(lowrezjam flat -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf)
-target_compile_options(lowrezjam PRIVATE -std=c++11)
+if (MINGW)
+	target_link_libraries(lowrezjam flat -lmingw32 -lSDL2main -lSDL2 -mwindows -lSDL2_image -lSDL2_mixer -lSDL2_ttf)
+else (MINGW)
+	target_link_libraries(lowrezjam flat -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf)
+endif (MINGW)
