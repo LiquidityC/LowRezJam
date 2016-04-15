@@ -13,6 +13,7 @@ class GameStateController : public flat2d::VirtualGameStateController
 		JamJar *jamJar = nullptr;
 		GameState state = GameState::MAIN_MENU;
 		bool stateChange = false;
+		bool quitGame = false;
 
 		void reloadMainMenu(flat2d::GameData*);
 		void reloadLevelScreen(flat2d::GameData*);

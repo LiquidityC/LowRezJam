@@ -1,0 +1,11 @@
+#ifndef AUDIOMAPPINGS_H_
+#define	AUDIOMAPPINGS_H_
+
+enum Effect {
+	SPOON_ON_GROUND,
+	SPOON_ON_JAR,
+	SHATTER,
+	SPLAT
+};
+
+#endif // AUDIOMAPPINGS_H_

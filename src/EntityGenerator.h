@@ -7,6 +7,7 @@ class EntityGenerator
 {
 	private:
 		flat2d::Timer timer;
+		flat2d::Timer dontGetBoringTimer;
 
 		void generateSpoon(const flat2d::GameData*);
 		void generateJam(const flat2d::GameData*);
@@ -17,6 +18,7 @@ class EntityGenerator
 	public:
 		EntityGenerator() {
 			timer.start();
+			dontGetBoringTimer.start();
 		}
 
 		void generate(const flat2d::GameData*);

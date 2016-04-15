@@ -1,6 +1,7 @@
 #include "Jam.h"
 #include "JamSpot.h"
 #include "Layers.h"
+#include "AudioMappings.h"
 
 void Jam::init(const flat2d::GameData *gameData)
 {
@@ -26,6 +27,7 @@ void Jam::preMove(const flat2d::GameData *gameData)
 bool Jam::onVerticalCollision(flat2d::Entity *collider, const flat2d::GameData *gameData)
 {
 	bool createSpot = false;
+	flat2d::Mixer *mixer = gameData->getMixer();
 	switch (collider->getType()) {
 		case EntityType::SPOON:
 			return true;
@@ -34,9 +36,11 @@ bool Jam::onVerticalCollision(flat2d::Entity *collider, const flat2d::GameData *
 		case EntityType::JAM_SPOT:
 			return true;
 		case EntityType::FLOOR:
+			mixer->playEffect(Effect::SPLAT);
 			createSpot = true;
 			break;
 		default:
+			mixer->playEffect(Effect::SPLAT);
 			break;
 	}
 

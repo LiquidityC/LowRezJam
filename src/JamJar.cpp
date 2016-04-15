@@ -1,4 +1,5 @@
 #include "JamJar.h"
+#include "AudioMappings.h"
 
 void JamJar::init(const flat2d::GameData *gameData)
 {
@@ -109,6 +110,11 @@ bool JamJar::onVerticalCollision(flat2d::Entity *collider, const flat2d::GameDat
 		default:
 			break;
 	}
+
+	if (jamContent < 0) {
+		gameData->getMixer()->playEffect(Effect::SHATTER);
+	}
+
 
 	return false;
 }

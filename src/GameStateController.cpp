@@ -20,6 +20,15 @@ void GameStateController::handle(const SDL_Event& event)
 				setState(GameState::GAME);
 			}
 			break;
+		case GameState::GAME_OVER:
+			if (event.type == SDL_KEYDOWN) {
+				if (event.key.keysym.sym == SDLK_r) {
+					generator.setLevel(1);
+					setState(GameState::LEVEL_SCREEN);
+				} else if (event.key.keysym.sym == SDLK_q) {
+					quitGame = true;
+				}
+			}
 		default:
 			break;
 	}
@@ -40,7 +49,7 @@ bool GameStateController::gameStateCheck(flat2d::GameData *gameData)
 		generator.setLevel(generator.getLevel() + 1);
 		setState(GameState::LEVEL_SCREEN);
 	} else if (jamJar != nullptr && jamJar->isBroken()) {
-		// GameOver
+		setState(GameState::GAME_OVER);
 	}
 
 	if (stateChange) {
@@ -57,7 +66,7 @@ bool GameStateController::gameStateCheck(flat2d::GameData *gameData)
 
 bool GameStateController::quit()
 {
-	return jamJar != nullptr && jamJar->isBroken();
+	return quitGame;
 }
 
 void GameStateController::resetGame(flat2d::GameData *gameData)
@@ -116,7 +125,9 @@ void GameStateController::reloadWinScreen(flat2d::GameData *gameData)
 
 void GameStateController::reloadGameOverScreen(flat2d::GameData *gameData)
 {
-	// implement
+	flat2d::Entity *main = new Background("textures/GameOver.png");
+	main->init(gameData);
+	gameData->getEntityContainer()->registerObject(main, BG);
 }
 
 void GameStateController::reloadGame(flat2d::GameData *gameData)

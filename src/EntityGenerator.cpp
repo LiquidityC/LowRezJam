@@ -19,6 +19,19 @@ void EntityGenerator::generate(const flat2d::GameData *gameData)
 		if (genSpoon) {
 			generateSpoon(gameData);
 		}
+
+		if (genJam || genSpoon) {
+			dontGetBoringTimer.stop();
+			dontGetBoringTimer.start();
+		}
+
+		if (dontGetBoringTimer.getTicks() > 2000) {
+			if (getRandomNumber(1, 2) == 1) {
+				generateSpoon(gameData);
+			} else {
+				generateJam(gameData);
+			}
+		}
 	}
 }
 

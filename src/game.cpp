@@ -8,6 +8,7 @@
 
 #include "GameStateController.h"
 #include "Layers.h"
+#include "ResourceLoader.h"
 
 #define SCREEN_DIMENSION 512
 #define SCREEN_SCALE_DIMENSION 64
@@ -39,6 +40,8 @@ int main( int argc, char* args[] )
 
 	SDL_RenderSetLogicalSize(flat->getGameData()->getRenderData()->getRenderer(), SCREEN_SCALE_DIMENSION, SCREEN_SCALE_DIMENSION);
 
+	ResourceLoader loader;
+	loader.loadSounds(flat->getGameData());
 
 	// Start the game loop
 	engine->run(gameStateController);
