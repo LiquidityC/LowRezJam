@@ -36,15 +36,31 @@ int main( int argc, char* args[] )
 	gameStateController->resetGame(flat->getGameData());
 
 	flat2d::GameEngine *engine = flat->getGameEngine();
-	engine->init(SCREEN_DIMENSION, SCREEN_DIMENSION, 24);
+	engine->init(24);
 
 	SDL_RenderSetLogicalSize(flat->getGameData()->getRenderData()->getRenderer(), SCREEN_SCALE_DIMENSION, SCREEN_SCALE_DIMENSION);
 
 	ResourceLoader loader;
 	loader.loadSounds(flat->getGameData());
 
+	auto gameStateCallback = [gameStateController](flat2d::GameData* gameData) -> flat2d::GameStateAction
+	{
+		if (gameStateController->quit()) {
+			return flat2d::GameStateAction::QUIT;
+		} else if (gameStateController->gameStateCheck(gameData)) {
+			return flat2d::GameStateAction::RESET;
+		} else {
+			return flat2d::GameStateAction::NOOP;
+		}
+	};
+
+	auto handleCallback = [gameStateController](const SDL_Event& event)
+	{
+		gameStateController->handle(event);
+	};
+
 	// Start the game loop
-	engine->run(gameStateController);
+	engine->run(gameStateCallback, handleCallback);
 
 	delete flat;
 

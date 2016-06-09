@@ -6,7 +6,7 @@
 #include "JamJar.h"
 #include "GameStates.h"
 
-class GameStateController : public flat2d::VirtualGameStateController
+class GameStateController
 {
 	private:
 		EntityGenerator generator;
